@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Lengkap Zakat - Islamic Finance Insight</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Poppins & Amiri) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            light: '#fdf2f8', // Pastel pink sangat muda
+                            primary: '#f472b6', // Pastel pink utama (Pink-400)
+                            dark: '#9d174d', // Pink gelap untuk kontras teks/footer
+                            accent: '#eab308' // Kuning tetap untuk tombol aksi agar menonjol
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo.png" alt="Logo" class="h-10 w-auto outline-none border-none rounded-none object-contain" onerror="this.src='https://via.placeholder.com/40x40?text=A'">
+                <span class="font-bold text-2xl tracking-tight text-islamic-dark">AMANA</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600">
+                <a href="index.html" class="hover:text-islamic-primary transition-colors">Beranda</a>
+                <a href="zakat.html" class="text-islamic-primary font-semibold border-b-2 border-islamic-primary pb-1">Zakat</a>
+                <a href="wakaf.html" class="hover:text-islamic-primary transition-colors">Wakaf</a>
+                <a href="waris.html" class="hover:text-islamic-primary transition-colors">Waris</a>
+                <a href="artikel.html" class="hover:text-islamic-primary transition-colors">Artikel</a>
+                <a href="faq.html" class="hover:text-islamic-primary transition-colors">FAQ</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Beranda</a>
+                <a href="zakat.html" class="block py-2 text-islamic-primary font-bold">Zakat</a>
+                <a href="wakaf.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Wakaf</a>
+                <a href="waris.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Waris</a>
+                <a href="artikel.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Artikel</a>
+                <a href="faq.html" class="block py-2 text-gray-700 hover:text-islamic-primary">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Zakat -->
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Breadcrumb / Back Link -->
+        <div class="mb-8">
+            <a href="index.html" class="inline-flex items-center text-gray-500 hover:text-islamic-primary mb-4 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Beranda
+            </a>
+            <h1 class="text-3xl md:text-5xl font-bold text-islamic-dark">Panduan Lengkap Zakat</h1>
+            <div class="w-20 h-1 bg-islamic-accent mt-4 rounded-full"></div>
+        </div>
+
+        <article class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+            <!-- Pengertian -->
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Pengertian Zakat</h2>
+            <p class="mb-4">Secara bahasa (etimologi), kata <strong>"Zakat"</strong> berarti <em>suci</em>, <em>tumbuh</em>, <em>berkembang</em>, dan <em>berkah</em>. Maknanya, harta yang dikeluarkan zakatnya akan menjadi suci dari hak orang lain dan mendatangkan keberkahan.</p>
+            <p>Secara istilah (terminologi), zakat adalah bagian tertentu dari harta yang wajib dikeluarkan oleh setiap muslim apabila telah mencapai syarat yang ditetapkan (nisab & haul), untuk diberikan kepada golongan yang berhak menerimanya (asnaf).</p>
+
+            <!-- Dalil Section -->
+            <div class="bg-islamic-light p-6 md:p-8 rounded-2xl border-l-4 border-islamic-primary my-10 shadow-sm">
+                <h3 class="text-islamic-dark font-bold text-lg flex items-center mb-6">
+                    <i class="fa-solid fa-book-quran mr-3 text-2xl"></i>QS. At-Taubah: 103
+                </h3>
+                <p class="font-arabic text-3xl text-right leading-loose mb-6 text-gray-800" dir="rtl">
+                    خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا وَصَلِّ عَلَيْهِمْ ۖ إِنَّ صَلَاتَكَ سَكَنٌ لَّهُمْ ۗ وَاللَّهُ سَمِيعٌ عَلِيمٌ
+                </p>
+                <p class="italic text-gray-700 text-sm md:text-base border-t border-pink-200 pt-4">
+                    "Ambillah zakat dari sebagian harta mereka, dengan zakat itu kamu membersihkan dan mensucikan mereka dan mendoalah untuk mereka. Sesungguhnya doa kamu itu (menjadi) ketenteraman jiwa bagi mereka. Dan Allah Maha Mendengar lagi Maha Mengetahui."
+                </p>
+            </div>
+
+            <!-- 1. Jenis-Jenis Zakat -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">1. Jenis-Jenis Zakat</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border border-gray-100 rounded-xl p-6 bg-white shadow-sm hover:border-islamic-primary hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-pink-50 text-islamic-primary rounded-full flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-person-praying"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-islamic-dark mb-2">Zakat Fitrah</h3>
+                        <p class="text-sm text-gray-600">Zakat jiwa yang wajib dikeluarkan setiap muslim menjelang Idul Fitri (bulan Ramadhan).</p>
+                    </div>
+                    <div class="border border-gray-100 rounded-xl p-6 bg-white shadow-sm hover:border-islamic-primary hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-pink-50 text-islamic-primary rounded-full flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-islamic-dark mb-2">Zakat Mal</h3>
+                        <p class="text-sm text-gray-600">Zakat harta yang dikeluarkan dari kepemilikan harta seperti emas, perak, perdagangan, pertanian, dll.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Syarat Wajib Zakat -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">2. Syarat Wajib Zakat</h2>
+                <ul class="list-none space-y-4 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-islamic-primary mt-1 mr-4 text-xl"></i> <span><strong>Beragama Islam</strong></span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-islamic-primary mt-1 mr-4 text-xl"></i> <span><strong>Merdeka</strong> (Bukan hamba sahaya)</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-islamic-primary mt-1 mr-4 text-xl"></i> <span><strong>Memiliki harta secara penuh</strong> (Milik sempurna)</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-islamic-primary mt-1 mr-4 text-xl"></i> <span><strong>Harta mencapai nisab</strong> (Batas minimal)</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-islamic-primary mt-1 mr-4 text-xl"></i> <span><strong>Harta dimiliki selama satu haul</strong> (1 tahun hijriah, kecuali zakat fitrah & pertanian)</span></li>
+                </ul>
+            </div>
+
+            <!-- 3. Harta yang Wajib Dizakati -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">3. Harta yang Wajib Dizakati</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl border border-gray-100 shadow-sm">
+                    <ul class="grid md:grid-cols-2 gap-4 text-base">
+                        <li class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-coins text-yellow-500 mr-3 text-lg"></i> Emas dan Perak</li>
+                        <li class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-shop text-blue-500 mr-3 text-lg"></i> Harta Perdagangan</li>
+                        <li class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-wheat-awn text-green-500 mr-3 text-lg"></i> Hasil Pertanian</li>
+                        <li class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-cow text-amber-700 mr-3 text-lg"></i> Peternakan</li>
+                        <li class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-gem text-purple-500 mr-3 text-lg"></i> Harta Temuan & Tambang</li>
+                        <li class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-briefcase text-gray-600 mr-3 text-lg"></i> Penghasilan/Profesi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. Nisab & Haul -->
+            <div class="mb-10 bg-islamic-light p-6 md:p-8 rounded-2xl border border-pink-100">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">4. Nisab dan Haul</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-5 rounded-xl shadow-sm">
+                        <h3 class="font-bold text-islamic-primary text-xl mb-2"><i class="fa-solid fa-scale-balanced mr-2"></i> Nisab</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">Batas minimal jumlah harta yang wajib dikeluarkan zakatnya. Jika harta kurang dari nisab, maka tidak wajib membayar zakat.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm">
+                        <h3 class="font-bold text-islamic-primary text-xl mb-2"><i class="fa-regular fa-calendar-days mr-2"></i> Haul</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">Masa kepemilikan harta selama satu tahun hijriah. (Catatan: Tidak berlaku haul pada zakat fitrah dan hasil panen pertanian).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Golongan Penerima (Asnaf) -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">5. Golongan Penerima (8 Asnaf)</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">1. Fakir</span></div>
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">2. Miskin</span></div>
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">3. Amil</span></div>
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">4. Mualaf</span></div>
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">5. Riqab</span></div>
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">6. Gharim</span></div>
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">7. Fisabilillah</span></div>
+                    <div class="p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:bg-islamic-primary hover:text-white transition group"><span class="block font-bold text-islamic-dark group-hover:text-white">8. Ibnu Sabil</span></div>
+                </div>
+            </div>
+
+            <!-- 6. Waktu Pembayaran -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">6. Waktu Pembayaran Zakat</h2>
+                <div class="space-y-4">
+                    <div class="flex flex-col md:flex-row items-start md:items-center p-4 bg-green-50 rounded-xl border border-green-100">
+                        <span class="bg-green-600 text-white text-sm font-bold px-3 py-1.5 rounded-lg mb-2 md:mb-0 md:mr-4 w-24 text-center">WAJIB</span>
+                        <p class="text-sm md:text-base text-gray-800">Saat harta telah mencapai nisab dan haul (waktu kepemilikan 1 tahun).</p>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-start md:items-center p-4 bg-blue-50 rounded-xl border border-blue-100">
+                        <span class="bg-blue-500 text-white text-sm font-bold px-3 py-1.5 rounded-lg mb-2 md:mb-0 md:mr-4 w-24 text-center">SUNNAH</span>
+                        <p class="text-sm md:text-base text-gray-800">Dipercepat sebelum waktu wajib (ta'jil zakat) jika ada kebutuhan umat yang mendesak.</p>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-start md:items-center p-4 bg-red-50 rounded-xl border border-red-100">
+                        <span class="bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-lg mb-2 md:mb-0 md:mr-4 w-24 text-center">HARAM</span>
+                        <p class="text-sm md:text-base text-gray-800">Menunda pembayaran zakat padahal mampu dan sudah tiba waktu wajibnya.</p>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-islamic-dark text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Islamic Finance Insight</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mendorong literasi keuangan syariah di Indonesia melalui teknologi digital dan edukasi yang mudah diakses oleh semua lapisan masyarakat.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Tautan Cepat</h4>
+                <ul class="text-gray-400 space-y-2 text-sm">
+                    <li><a href="zakat.html" class="hover:text-white transition-colors">Tentang Zakat</a></li>
+                    <li><a href="wakaf.html" class="hover:text-white transition-colors">Tentang Wakaf</a></li>
+                    <li><a href="hitung-waris.html" class="hover:text-white transition-colors">Kalkulator Waris</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Kontak</h4>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Islamic Finance Insight. Dipersembahkan untuk Lomba Poster Nasional.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

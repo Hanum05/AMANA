@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atur Keuangan Syariah - Islamic Finance Insight</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            light: '#fdf2f8', // Pastel pink sangat muda
+                            primary: '#f472b6', // Pastel pink utama (Pink-400)
+                            dark: '#9d174d', // Pink gelap untuk kontras teks/footer
+                            accent: '#eab308' // Kuning tetap untuk tombol aksi
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Animasi untuk peringatan Israf */
+        @keyframes pulse-red {
+            0%, 100% { background-color: #fee2e2; border-color: #ef4444; }
+            50% { background-color: #fca5a5; border-color: #b91c1c; }
+        }
+        .israf-warning-active {
+            animation: pulse-red 2s infinite;
+            color: #7f1d1d;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans pb-10">
+
+    <!-- Header / Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo.png" alt="Logo" class="h-10 w-auto outline-none border-none rounded-none object-contain" onerror="this.src='https://via.placeholder.com/40x40?text=A'">
+                <span class="font-bold text-2xl tracking-tight text-islamic-dark">AMANA</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-islamic-primary transition-colors">Beranda</a>
+                <a href="zakat.html" class="hover:text-islamic-primary transition-colors">Zakat</a>
+                <a href="wakaf.html" class="hover:text-islamic-primary transition-colors">Wakaf</a>
+                <a href="waris.html" class="hover:text-islamic-primary transition-colors">Waris</a>
+                <!-- Link Atur Keuangan Aktif -->
+                <a href="atur-keuangan.html" class="text-islamic-primary font-semibold border-b-2 border-islamic-primary pb-1">Atur Keuangan</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Beranda</a>
+                <a href="atur-keuangan.html" class="block py-2 text-islamic-primary font-bold">Atur Keuangan</a>
+                <a href="zakat.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Zakat</a>
+                <a href="wakaf.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Wakaf</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal Pop-up ZISWAF (Hidden by default) -->
+    <div id="ziswaf-modal" class="fixed inset-0 z-[100] hidden bg-gray-900 bg-opacity-50 flex items-center justify-center px-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl transform scale-100 transition-transform">
+            <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-hand-holding-dollar text-4xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Alhamdulillah! 🌟</h2>
+            <p class="text-gray-600 mb-6">
+                Atas rezeki bulan ini. Sistem telah memisahkan <strong>5%</strong> dari pendapatan Anda sebagai alokasi Zakat/Infaq untuk membersihkan harta dan berbagi dengan sesama.
+            </p>
+            <button onclick="closeZiswafModal()" class="w-full bg-islamic-primary hover:bg-islamic-dark text-white font-bold py-3 rounded-xl transition duration-300">
+                Lanjutkan Atur Keuangan
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-islamic-dark mb-3">Asisten Keuangan Syariah</h1>
+            <p class="text-gray-500">Seimbangkan kebutuhan duniamu dan bekal akhiratmu</p>
+            <div class="flex justify-center mt-4">
+                <button onclick="resetData()" class="text-xs text-red-500 border border-red-200 px-3 py-1 rounded hover:bg-red-50 transition">
+                    <i class="fa-solid fa-rotate-right mr-1"></i> Reset Data Prototype
+                </button>
+            </div>
+        </div>
+
+        <!-- FITUR 1: Setup Pendapatan -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 md:p-8 mb-8 relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 opacity-5 text-islamic-primary">
+                <i class="fa-solid fa-wallet text-9xl"></i>
+            </div>
+            <h2 class="text-xl font-bold text-gray-800 mb-4 relative z-10">1. Pemasukan Bulan Ini</h2>
+            <div class="flex flex-col md:flex-row gap-4 relative z-10">
+                <div class="relative flex-grow">
+                    <span class="absolute left-4 top-4 text-gray-400 font-bold">Rp</span>
+                    <input type="number" id="input-pendapatan" class="w-full pl-12 p-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-islamic-primary outline-none text-lg font-semibold" placeholder="Contoh: 5000000" min="0">
+                </div>
+                <button onclick="setPendapatan()" class="bg-islamic-dark hover:bg-pink-900 text-white font-bold py-4 px-8 rounded-2xl shadow-lg transition duration-300 transform hover:scale-105 whitespace-nowrap">
+                    Alokasikan Otomatis
+                </button>
+            </div>
+        </div>
+
+        <!-- FITUR 1 Lanjutan: Dashboard Alokasi (Modified 50/30/20) -->
+        <div id="dashboard-alokasi" class="hidden animate-fade-in-up mb-10">
+            <h2 class="text-xl font-bold text-gray-800 mb-4"><i class="fa-solid fa-chart-pie mr-2 text-islamic-primary"></i>Dashboard Alokasi Syariah</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Pos 1: ZISWAF (5%) -->
+                <div class="bg-green-50 rounded-2xl p-5 border border-green-100 shadow-sm relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-2 h-full bg-green-400"></div>
+                    <p class="text-xs font-bold text-green-600 uppercase mb-1">Hak Allah & Sesama (5%)</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">ZISWAF</h3>
+                    <p class="text-2xl font-bold text-green-700 mb-3" id="budget-ziswaf">Rp 0</p>
+                    <!-- Progress (Sisa) -->
+                    <div class="w-full bg-green-200 rounded-full h-1.5 mb-1"><div id="bar-ziswaf" class="bg-green-500 h-1.5 rounded-full" style="width: 100%"></div></div>
+                    <p class="text-xs text-gray-500 text-right" id="sisa-ziswaf">Sisa: Rp 0</p>
+                </div>
+
+                <!-- Pos 2: Kebutuhan Pokok (50%) -->
+                <div class="bg-blue-50 rounded-2xl p-5 border border-blue-100 shadow-sm relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-2 h-full bg-blue-400"></div>
+                    <p class="text-xs font-bold text-blue-600 uppercase mb-1">Kebutuhan Hidup (50%)</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Pokok</h3>
+                    <p class="text-2xl font-bold text-blue-700 mb-3" id="budget-pokok">Rp 0</p>
+                    <div class="w-full bg-blue-200 rounded-full h-1.5 mb-1"><div id="bar-pokok" class="bg-blue-500 h-1.5 rounded-full" style="width: 100%"></div></div>
+                    <p class="text-xs text-gray-500 text-right" id="sisa-pokok">Sisa: Rp 0</p>
+                </div>
+
+                <!-- Pos 3: Gaya Hidup (25%) -->
+                <div id="card-keinginan" class="bg-yellow-50 rounded-2xl p-5 border border-yellow-100 shadow-sm relative overflow-hidden transition-colors duration-500">
+                    <div id="indicator-keinginan" class="absolute right-0 top-0 w-2 h-full bg-yellow-400"></div>
+                    <p class="text-xs font-bold text-yellow-600 uppercase mb-1">Gaya Hidup (25%)</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Keinginan</h3>
+                    <p class="text-2xl font-bold text-yellow-700 mb-3" id="budget-keinginan">Rp 0</p>
+                    <div class="w-full bg-yellow-200 rounded-full h-1.5 mb-1"><div id="bar-keinginan" class="bg-yellow-500 h-1.5 rounded-full transition-all duration-500" style="width: 100%"></div></div>
+                    <p class="text-xs text-gray-500 text-right" id="sisa-keinginan">Sisa: Rp 0</p>
+                </div>
+
+                <!-- Pos 4: Tabungan (20%) -->
+                <div class="bg-purple-50 rounded-2xl p-5 border border-purple-100 shadow-sm relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-2 h-full bg-purple-400"></div>
+                    <p class="text-xs font-bold text-purple-600 uppercase mb-1">Masa Depan (20%)</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Tabungan</h3>
+                    <p class="text-2xl font-bold text-purple-700 mb-3" id="budget-tabungan">Rp 0</p>
+                    <div class="w-full bg-purple-200 rounded-full h-1.5 mb-1"><div id="bar-tabungan" class="bg-purple-500 h-1.5 rounded-full" style="width: 100%"></div></div>
+                    <p class="text-xs text-gray-500 text-right" id="sisa-tabungan">Sisa: Rp 0</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FITUR 2: Pencatat Pengeluaran & Anti-Israf -->
+        <div id="section-pengeluaran" class="hidden animate-fade-in-up grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+            
+            <!-- Form Input -->
+            <div class="lg:col-span-1 bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+                <h3 class="font-bold text-gray-800 mb-4 text-lg">Catat Pengeluaran</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">Nama Pengeluaran</label>
+                        <input type="text" id="nama-pengeluaran" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-islamic-primary outline-none" placeholder="Cth: Ngopi, Bayar Kos...">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">Kategori Pos</label>
+                        <select id="kategori-pengeluaran" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-islamic-primary outline-none">
+                            <option value="pokok">Kebutuhan Pokok</option>
+                            <option value="keinginan">Gaya Hidup / Keinginan</option>
+                            <option value="ziswaf">ZISWAF</option>
+                            <option value="tabungan">Tabungan</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">Nominal (Rp)</label>
+                        <input type="number" id="nominal-pengeluaran" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-islamic-primary outline-none" placeholder="0" min="0">
+                    </div>
+                    <button onclick="tambahPengeluaran()" class="w-full bg-islamic-primary hover:bg-islamic-dark text-white font-bold py-3 rounded-xl transition duration-300">
+                        <i class="fa-solid fa-plus mr-1"></i> Simpan
+                    </button>
+                </div>
+            </div>
+
+            <!-- List & Anti-Israf Warning -->
+            <div class="lg:col-span-2 space-y-4">
+                
+                <!-- Peringatan Anti-Israf (Hidden by default) -->
+                <div id="israf-warning" class="hidden rounded-2xl p-6 shadow-lg border-2">
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-triangle-exclamation text-red-600 text-3xl mr-4 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-red-700 mb-2">Peringatan Anti-Israf!</h3>
+                            <p class="text-gray-800 font-medium mb-3" id="teks-israf-sisa">Ups, budget gaya hidupmu sisa sedikit lagi bulan ini.</p>
+                            <div class="bg-white/60 p-4 rounded-xl border border-red-200">
+                                <p class="text-sm italic text-gray-700 mb-2">"...Sesungguhnya pemboros-pemboros itu adalah saudara-saudara syaitan dan syaitan itu adalah sangat ingkar kepada Tuhannya."</p>
+                                <p class="text-xs font-bold text-red-800">(QS. Al-Isra: 27)</p>
+                            </div>
+                            <p class="mt-3 text-sm font-bold text-red-900">Yakin mau checkout barang/beli kopi mahal lagi?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Pengeluaran -->
+                <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm h-full max-h-96 overflow-y-auto">
+                    <h3 class="font-bold text-gray-800 mb-4 text-lg border-b pb-2">Riwayat Pengeluaran</h3>
+                    <div id="list-pengeluaran" class="space-y-3">
+                        <!-- Items will be generated here -->
+                        <p class="text-sm text-gray-400 text-center italic mt-10">Belum ada pengeluaran tercatat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FITUR 3: Kalkulator Qurban & Darurat -->
+        <div class="bg-gradient-to-br from-islamic-dark to-islamic-primary rounded-3xl p-6 md:p-10 shadow-xl text-white">
+            <h2 class="text-2xl font-bold mb-2 flex items-center">
+                <i class="fa-solid fa-bullseye mr-3 text-islamic-accent"></i> Kalkulator Target Syariah
+            </h2>
+            <p class="text-pink-100 mb-8 text-sm md:text-base">Mulai rencanakan tabungan Qurban, Umrah, atau Dana Daruratmu secara realistis.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-pink-50">Apa Targetmu?</label>
+                        <input type="text" id="target-nama" class="w-full p-3 bg-white/10 border border-white/20 rounded-xl focus:ring-2 focus:ring-islamic-accent outline-none text-white placeholder-pink-200" placeholder="Cth: Kurban Kambing, Umrah...">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-pink-50">Berapa Biaya Targetnya? (Rp)</label>
+                        <input type="number" id="target-nominal" class="w-full p-3 bg-white/10 border border-white/20 rounded-xl focus:ring-2 focus:ring-islamic-accent outline-none text-white placeholder-pink-200" placeholder="Cth: 3500000" min="0">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-pink-50">Berapa Bulan Lagi Eksekusinya?</label>
+                        <input type="number" id="target-bulan" class="w-full p-3 bg-white/10 border border-white/20 rounded-xl focus:ring-2 focus:ring-islamic-accent outline-none text-white placeholder-pink-200" placeholder="Cth: 10" min="1">
+                    </div>
+                    <button onclick="hitungTarget()" class="w-full bg-islamic-accent hover:bg-yellow-400 text-islamic-dark font-bold py-3 rounded-xl transition duration-300 mt-2">
+                        Hitung Rencana Tabungan
+                    </button>
+                </div>
+
+                <!-- Hasil Target -->
+                <div class="bg-white rounded-2xl p-6 text-gray-800 flex flex-col justify-center shadow-inner relative overflow-hidden">
+                    <div class="absolute -right-5 -bottom-5 text-gray-100">
+                        <i class="fa-solid fa-calculator text-8xl"></i>
+                    </div>
+                    <div id="hasil-target" class="relative z-10 text-center hidden">
+                        <p class="text-sm text-gray-500 mb-1">Untuk mencapai target <strong id="res-nama" class="text-islamic-primary">Kurban</strong>,</p>
+                        <p class="text-sm text-gray-500 mb-4">Kamu hanya perlu menyisihkan:</p>
+                        
+                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 mb-3">
+                            <span class="block text-xs text-gray-400 font-bold uppercase mb-1">Per Hari</span>
+                            <span class="text-2xl font-bold text-islamic-dark" id="res-hari">Rp 0</span>
+                        </div>
+                        <p class="text-xs text-gray-400 font-bold uppercase my-1">ATAU</p>
+                        <div class="bg-gray-50 border border-gray-100 rounded-xl p-4">
+                            <span class="block text-xs text-gray-400 font-bold uppercase mb-1">Per Bulan</span>
+                            <span class="text-xl font-bold text-islamic-dark" id="res-bulan">Rp 0</span>
+                        </div>
+                    </div>
+                    <div id="hasil-target-empty" class="relative z-10 text-center text-gray-400 flex flex-col items-center">
+                        <i class="fa-solid fa-clipboard-list text-4xl mb-3 text-gray-200"></i>
+                        <p class="text-sm">Masukkan data target di samping untuk melihat rincian tabungan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer (Sama dengan halaman lain) -->
+    <footer class="bg-islamic-dark text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Islamic Finance Insight</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mendorong literasi keuangan syariah di Indonesia melalui teknologi digital dan edukasi yang mudah diakses oleh semua lapisan masyarakat.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Tautan Cepat</h4>
+                <ul class="text-gray-400 space-y-2 text-sm">
+                    <li><a href="zakat.html" class="hover:text-white">Tentang Zakat</a></li>
+                    <li><a href="wakaf.html" class="hover:text-white">Tentang Wakaf</a></li>
+                    <li><a href="atur-keuangan.html" class="hover:text-white">Asisten Keuangan</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Islamic Finance Insight. Dipersembahkan untuk Lomba Poster Nasional.</p>
+        </div>
+    </footer>
+
+    <!-- LOGIKA JAVASCRIPT SEBAGAI PROTOTYPE -->
+    <script>
+        // State Application
+        let appData = {
+            pendapatan: 0,
+            pengeluaran: [] // { id, nama, kategori, nominal, date }
+        };
+
+        const BGT_PERSEN = {
+            ziswaf: 0.05,
+            pokok: 0.50,
+            keinginan: 0.25,
+            tabungan: 0.20
+        };
+
+        // Format Uang
+        function formatRp(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+        }
+
+        // INIT & LOAD LOCALSTORAGE
+        window.onload = function() {
+            const saved = localStorage.getItem('amana_finance_data');
+            if (saved) {
+                appData = JSON.parse(saved);
+                if (appData.pendapatan > 0) {
+                    document.getElementById('input-pendapatan').value = appData.pendapatan;
+                    renderDashboard();
+                }
+            }
+        };
+
+        function saveData() {
+            localStorage.setItem('amana_finance_data', JSON.stringify(appData));
+        }
+
+        function resetData() {
+            if(confirm('Yakin ingin mereset semua data simulasi ini?')) {
+                localStorage.removeItem('amana_finance_data');
+                location.reload();
+            }
+        }
+
+        // 1. SET PENDAPATAN & ZISWAF POPUP
+        function setPendapatan() {
+            const inputVal = document.getElementById('input-pendapatan').value;
+            const nominal = parseFloat(inputVal);
+            
+            if (isNaN(nominal) || nominal <= 0) {
+                alert("Masukkan nominal pendapatan yang valid.");
+                return;
+            }
+
+            // Jika pendapatan baru diubah, kita tampilkan popup Ziswaf (efek WOW untuk juri)
+            if (appData.pendapatan !== nominal) {
+                appData.pendapatan = nominal;
+                saveData();
+                document.getElementById('ziswaf-modal').classList.remove('hidden');
+            }
+            
+            renderDashboard();
+        }
+
+        function closeZiswafModal() {
+            document.getElementById('ziswaf-modal').classList.add('hidden');
+        }
+
+        // 2. RENDER DASHBOARD (Budget vs Pengeluaran)
+        function renderDashboard() {
+            if (appData.pendapatan <= 0) return;
+
+            document.getElementById('dashboard-alokasi').classList.remove('hidden');
+            document.getElementById('section-pengeluaran').classList.remove('hidden');
+
+            // Kalkulasi Budget
+            const b_ziswaf = appData.pendapatan * BGT_PERSEN.ziswaf;
+            const b_pokok = appData.pendapatan * BGT_PERSEN.pokok;
+            const b_keinginan = appData.pendapatan * BGT_PERSEN.keinginan;
+            const b_tabungan = appData.pendapatan * BGT_PERSEN.tabungan;
+
+            // Set Teks Budget Maksimal
+            document.getElementById('budget-ziswaf').innerText = formatRp(b_ziswaf);
+            document.getElementById('budget-pokok').innerText = formatRp(b_pokok);
+            document.getElementById('budget-keinginan').innerText = formatRp(b_keinginan);
+            document.getElementById('budget-tabungan').innerText = formatRp(b_tabungan);
+
+            // Hitung Pengeluaran
+            let s_ziswaf = 0, s_pokok = 0, s_keinginan = 0, s_tabungan = 0;
+            appData.pengeluaran.forEach(p => {
+                if (p.kategori === 'ziswaf') s_ziswaf += p.nominal;
+                if (p.kategori === 'pokok') s_pokok += p.nominal;
+                if (p.kategori === 'keinginan') s_keinginan += p.nominal;
+                if (p.kategori === 'tabungan') s_tabungan += p.nominal;
+            });
+
+            // Update Sisa Teks & Progress Bar
+            updatePosUI('ziswaf', b_ziswaf, s_ziswaf, 'green');
+            updatePosUI('pokok', b_pokok, s_pokok, 'blue');
+            updatePosUI('keinginan', b_keinginan, s_keinginan, 'yellow'); // Keinginan spesial
+            updatePosUI('tabungan', b_tabungan, s_tabungan, 'purple');
+
+            renderListPengeluaran();
+            cekIsraf(b_keinginan, s_keinginan);
+        }
+
+        function updatePosUI(id, budget, spent, colorClass) {
+            let sisa = budget - spent;
+            let percent = (sisa / budget) * 100;
+            if (percent < 0) percent = 0;
+
+            document.getElementById(`sisa-${id}`).innerText = `Sisa: ${formatRp(sisa)}`;
+            document.getElementById(`bar-${id}`).style.width = `${percent}%`;
+            
+            // Ubah warna bar jadi merah jika habis
+            const barEl = document.getElementById(`bar-${id}`);
+            if (percent === 0) {
+                barEl.className = `bg-red-500 h-1.5 rounded-full transition-all duration-500`;
+                document.getElementById(`sisa-${id}`).classList.add('text-red-500');
+            } else {
+                barEl.className = `bg-${colorClass}-500 h-1.5 rounded-full transition-all duration-500`;
+                document.getElementById(`sisa-${id}`).classList.remove('text-red-500');
+            }
+        }
+
+        // 3. TAMBAH PENGELUARAN
+        function tambahPengeluaran() {
+            const nama = document.getElementById('nama-pengeluaran').value;
+            const kat = document.getElementById('kategori-pengeluaran').value;
+            const nom = parseFloat(document.getElementById('nominal-pengeluaran').value);
+
+            if (!nama || isNaN(nom) || nom <= 0) {
+                alert("Lengkapi form pengeluaran dengan benar.");
+                return;
+            }
+
+            appData.pengeluaran.push({
+                id: Date.now(),
+                nama: nama,
+                kategori: kat,
+                nominal: nom,
+                date: new Date().toLocaleDateString('id-ID')
+            });
+
+            saveData();
+            
+            // Clear input
+            document.getElementById('nama-pengeluaran').value = '';
+            document.getElementById('nominal-pengeluaran').value = '';
+
+            renderDashboard();
+        }
+
+        function hapusPengeluaran(id) {
+            appData.pengeluaran = appData.pengeluaran.filter(p => p.id !== id);
+            saveData();
+            renderDashboard();
+        }
+
+        function renderListPengeluaran() {
+            const listEl = document.getElementById('list-pengeluaran');
+            listEl.innerHTML = '';
+
+            if (appData.pengeluaran.length === 0) {
+                listEl.innerHTML = '<p class="text-sm text-gray-400 text-center italic mt-10">Belum ada pengeluaran tercatat.</p>';
+                return;
+            }
+
+            // Reverse agar terbaru di atas
+            const sorted = [...appData.pengeluaran].reverse();
+            
+            sorted.forEach(p => {
+                let badgeColor = 'bg-gray-100 text-gray-600';
+                let icon = 'fa-receipt';
+                if(p.kategori === 'ziswaf') { badgeColor = 'bg-green-100 text-green-700'; icon = 'fa-hand-holding-dollar'; }
+                if(p.kategori === 'pokok') { badgeColor = 'bg-blue-100 text-blue-700'; icon = 'fa-basket-shopping'; }
+                if(p.kategori === 'keinginan') { badgeColor = 'bg-yellow-100 text-yellow-700'; icon = 'fa-mug-hot'; }
+                if(p.kategori === 'tabungan') { badgeColor = 'bg-purple-100 text-purple-700'; icon = 'fa-piggy-bank'; }
+
+                const itemHTML = `
+                    <div class="flex items-center justify-between p-3 border border-gray-100 rounded-xl hover:bg-gray-50 transition">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 ${badgeColor} rounded-full flex items-center justify-center mr-3">
+                                <i class="fa-solid ${icon}"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-800 text-sm">${p.nama}</p>
+                                <p class="text-xs text-gray-500">${p.date}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="font-bold text-gray-800 mr-3 text-sm">${formatRp(p.nominal)}</span>
+                            <button onclick="hapusPengeluaran(${p.id})" class="text-gray-400 hover:text-red-500 transition"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                `;
+                listEl.innerHTML += itemHTML;
+            });
+        }
+
+        // 4. LOGIKA ANTI-ISRAF (PEMBOROSAN)
+        function cekIsraf(budgetKeinginan, spentKeinginan) {
+            const warningBox = document.getElementById('israf-warning');
+            const cardKeinginan = document.getElementById('card-keinginan');
+            const teksSisa = document.getElementById('teks-israf-sisa');
+            
+            const sisa = budgetKeinginan - spentKeinginan;
+            const persentaseSisa = (sisa / budgetKeinginan) * 100;
+
+            // Jika budget keinginan sisa 10% atau kurang dari Rp 0 (sudah minus)
+            if (persentaseSisa <= 10) {
+                // Tampilkan Peringatan UI Merah/Kuning Berkedip
+                warningBox.classList.remove('hidden');
+                warningBox.classList.add('israf-warning-active');
+                
+                cardKeinginan.classList.add('bg-red-50', 'border-red-300');
+                cardKeinginan.classList.remove('bg-yellow-50', 'border-yellow-100');
+                document.getElementById('indicator-keinginan').classList.replace('bg-yellow-400', 'bg-red-500');
+                
+                if(sisa < 0) {
+                    teksSisa.innerText = `Astagfirullah, budget gaya hidupmu sudah MINUS ${formatRp(Math.abs(sisa))}!`;
+                } else {
+                    teksSisa.innerText = `Ups, budget gaya hidupmu sisa ${persentaseSisa.toFixed(0)}% (${formatRp(sisa)}) lagi bulan ini.`;
+                }
+            } else {
+                // Sembunyikan peringatan
+                warningBox.classList.add('hidden');
+                warningBox.classList.remove('israf-warning-active');
+                
+                cardKeinginan.classList.remove('bg-red-50', 'border-red-300');
+                cardKeinginan.classList.add('bg-yellow-50', 'border-yellow-100');
+                document.getElementById('indicator-keinginan').classList.replace('bg-red-500', 'bg-yellow-400');
+            }
+        }
+
+        // 5. KALKULATOR TARGET (QURBAN/DARURAT)
+        function hitungTarget() {
+            const nama = document.getElementById('target-nama').value || 'Target Anda';
+            const nominal = parseFloat(document.getElementById('target-nominal').value);
+            const bulan = parseInt(document.getElementById('target-bulan').value);
+
+            if (isNaN(nominal) || nominal <= 0 || isNaN(bulan) || bulan <= 0) {
+                alert("Masukkan Biaya Target dan Waktu (Bulan) dengan benar.");
+                return;
+            }
+
+            const perBulan = nominal / bulan;
+            const perHari = perBulan / 30;
+
+            document.getElementById('res-nama').innerText = nama;
+            document.getElementById('res-bulan').innerText = formatRp(perBulan);
+            document.getElementById('res-hari').innerText = formatRp(perHari);
+
+            document.getElementById('hasil-target-empty').classList.add('hidden');
+            document.getElementById('hasil-target').classList.remove('hidden');
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner Halal AI - Islamic Finance Insight</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            light: '#fdf2f8', 
+                            primary: '#f472b6', // Pink utama
+                            dark: '#9d174d', 
+                            accent: '#eab308'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Animasi Garis Scanner Kamera */
+        @keyframes scan-line {
+            0% { top: 10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 90%; opacity: 0; }
+        }
+        .animate-scan {
+            animation: scan-line 2s ease-in-out infinite;
+        }
+        /* Efek Pulse untuk tombol scan */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(244, 114, 182, 0); }
+        }
+        .btn-scan {
+            animation: pulse-glow 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans pb-10">
+
+    <!-- Header / Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo.png" alt="Logo" class="h-10 w-auto outline-none border-none rounded-none object-contain" onerror="this.src='https://via.placeholder.com/40x40?text=A'">
+                <span class="font-bold text-2xl tracking-tight text-islamic-dark">AMANA</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-islamic-primary transition-colors">Beranda</a>
+                <a href="zakat.html" class="hover:text-islamic-primary transition-colors">Zakat</a>
+                <a href="wakaf.html" class="hover:text-islamic-primary transition-colors">Wakaf</a>
+                <a href="waris.html" class="hover:text-islamic-primary transition-colors">Waris</a>
+                <a href="atur-keuangan.html" class="hover:text-islamic-primary transition-colors">Atur Keuangan</a>
+                <!-- Link Cek Halal Aktif -->
+                <a href="cek-halal.html" class="text-islamic-primary font-semibold border-b-2 border-islamic-primary pb-1">Cek Halal</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Beranda</a>
+                <a href="atur-keuangan.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Atur Keuangan</a>
+                <a href="cek-halal.html" class="block py-2 text-islamic-primary font-bold">Cek Halal</a>
+                <a href="zakat.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Zakat</a>
+                <a href="wakaf.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Wakaf</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+            <a href="index.html" class="inline-flex items-center text-gray-500 hover:text-islamic-primary mb-4 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Beranda
+            </a>
+            <h1 class="text-3xl md:text-4xl font-bold text-islamic-dark mb-3">AI Halal Scanner</h1>
+            <p class="text-gray-500 text-sm md:text-base max-w-lg mx-auto">
+                Arahkan kamera ke logo Halal pada kemasan produk untuk memverifikasi keasliannya berdasarkan database BPJPH.
+            </p>
+        </div>
+
+        <!-- TAB NAVIGATION (Kamera vs Input Manual) -->
+        <div class="flex justify-center mb-6">
+            <div class="bg-white p-1 rounded-full shadow-sm border border-gray-100 flex space-x-1">
+                <button id="tab-kamera" onclick="switchTab('kamera')" class="px-6 py-2 rounded-full text-sm font-bold bg-islamic-primary text-white transition-all">
+                    <i class="fa-solid fa-camera mr-2"></i> Scan Kamera
+                </button>
+                <button id="tab-manual" onclick="switchTab('manual')" class="px-6 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-islamic-primary transition-all">
+                    <i class="fa-solid fa-keyboard mr-2"></i> Input Nomor
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB 1: KAMERA SCANNER -->
+        <div id="view-kamera" class="block animate-fade-in-up">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100 max-w-md mx-auto relative">
+                
+                <!-- Camera Container -->
+                <div class="relative w-full bg-gray-900 rounded-2xl overflow-hidden aspect-[3/4] shadow-inner">
+                    
+                    <!-- Video Output -->
+                    <video id="kamera-stream" class="w-full h-full object-cover" autoplay playsinline></video>
+                    
+                    <!-- Viewfinder Frame (Sudut Kamera) -->
+                    <div id="viewfinder" class="absolute inset-0 pointer-events-none p-6 flex flex-col justify-between z-10">
+                        <div class="flex justify-between">
+                            <div class="w-12 h-12 border-t-4 border-l-4 border-white/70 rounded-tl-xl transition-colors duration-300" id="corner-tl"></div>
+                            <div class="w-12 h-12 border-t-4 border-r-4 border-white/70 rounded-tr-xl transition-colors duration-300" id="corner-tr"></div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class="w-12 h-12 border-b-4 border-l-4 border-white/70 rounded-bl-xl transition-colors duration-300" id="corner-bl"></div>
+                            <div class="w-12 h-12 border-b-4 border-r-4 border-white/70 rounded-br-xl transition-colors duration-300" id="corner-br"></div>
+                        </div>
+                    </div>
+
+                    <!-- Scanning Line Animation -->
+                    <div id="scan-line" class="hidden absolute left-0 w-full h-1 bg-islamic-primary shadow-[0_0_15px_#f472b6] animate-scan z-20"></div>
+
+                    <!-- Peringatan Kamera Izin -->
+                    <div id="camera-error" class="hidden absolute inset-0 bg-gray-900 flex flex-col items-center justify-center p-6 text-center z-30">
+                        <i class="fa-solid fa-camera-rotate text-gray-500 text-4xl mb-3"></i>
+                        <p class="text-white text-sm">Tidak dapat mengakses kamera. Pastikan Anda memberikan izin akses kamera di browser.</p>
+                        <button onclick="startCamera()" class="mt-4 text-xs bg-white text-gray-900 px-4 py-2 rounded-full font-bold">Coba Lagi</button>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="mt-8 text-center" id="scan-action-area">
+                    <button id="btn-capture" onclick="scanLogo()" class="btn-scan bg-islamic-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg hover:bg-pink-500 transition duration-300 relative group">
+                        <i class="fa-solid fa-expand text-2xl"></i>
+                        <!-- Tooltip -->
+                        <span class="absolute -top-10 scale-0 group-hover:scale-100 transition bg-gray-800 text-white text-xs px-3 py-1 rounded">Ambil Gambar</span>
+                    </button>
+                    <p class="text-sm text-gray-500 mt-4 font-medium" id="status-text">Posisikan logo Halal di dalam bingkai, lalu tekan tombol.</p>
+                </div>
+
+                <!-- Hasil Scan (Hidden initially) -->
+                <div id="hasil-scan" class="hidden mt-6 bg-gray-50 p-5 rounded-2xl border transition-all duration-500">
+                    <div id="hasil-icon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl shadow-sm">
+                        <!-- Icon di-generate lewat JS -->
+                    </div>
+                    <h3 id="hasil-title" class="text-xl font-bold text-center mb-1 text-gray-900">Menganalisis...</h3>
+                    <p id="hasil-desc" class="text-sm text-center text-gray-600 mb-4">Mohon tunggu sebentar.</p>
+                    
+                    <div id="hasil-details" class="hidden bg-white p-3 rounded-xl border border-gray-100 text-xs text-left mb-4">
+                        <!-- Detail Produk -->
+                    </div>
+
+                    <button onclick="resetScan()" class="w-full border-2 border-islamic-primary text-islamic-primary hover:bg-islamic-light font-bold py-2 rounded-xl transition">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Scan Ulang
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 2: INPUT NOMOR MANUAL -->
+        <div id="view-manual" class="hidden animate-fade-in-up">
+            <div class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-gray-100 max-w-lg mx-auto">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-pink-50 text-islamic-primary rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-800">Cek Nomor Sertifikat</h2>
+                    <p class="text-sm text-gray-500 mt-1">Masukkan ID/Nomor Sertifikat Halal yang tertera di bawah logo pada kemasan.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Nomor Sertifikat (ID)</label>
+                        <input type="text" id="input-nomor" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-islamic-primary outline-none" placeholder="Contoh: ID1234567890123">
+                    </div>
+                    <button onclick="cekManual()" class="w-full bg-islamic-dark hover:bg-pink-900 text-white font-bold py-4 rounded-xl shadow-lg transition transform active:scale-95">
+                        Cek Validasi
+                    </button>
+                </div>
+
+                <!-- Hasil Cek Manual -->
+                <div id="hasil-manual" class="hidden mt-6 p-4 rounded-xl border">
+                    <!-- Digenerate oleh JS -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-islamic-dark text-white py-12 px-4 mt-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Islamic Finance Insight</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mendorong literasi keuangan syariah di Indonesia melalui teknologi digital dan edukasi yang mudah diakses oleh semua lapisan masyarakat.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Tautan Cepat</h4>
+                <ul class="text-gray-400 space-y-2 text-sm">
+                    <li><a href="zakat.html" class="hover:text-white transition-colors">Tentang Zakat</a></li>
+                    <li><a href="wakaf.html" class="hover:text-white transition-colors">Tentang Wakaf</a></li>
+                    <li><a href="atur-keuangan.html" class="hover:text-white transition-colors">Asisten Keuangan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Kontak</h4>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Islamic Finance Insight. Dipersembahkan untuk Lomba Poster Nasional.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC UNTUK SCANNER -->
+    <script>
+        let streamTrack = null;
+        const video = document.getElementById('kamera-stream');
+        const cameraError = document.getElementById('camera-error');
+        
+        // 1. Inisialisasi Kamera saat halaman dimuat
+        window.addEventListener('load', () => {
+            startCamera();
+        });
+
+        function startCamera() {
+            cameraError.classList.add('hidden');
+            // Akses kamera belakang (environment)
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+                .then(function (stream) {
+                    streamTrack = stream.getTracks()[0];
+                    video.srcObject = stream;
+                })
+                .catch(function (err) {
+                    console.warn("Kamera tidak dapat diakses:", err);
+                    cameraError.classList.remove('hidden');
+                });
+            } else {
+                cameraError.classList.remove('hidden');
+            }
+        }
+
+        function stopCamera() {
+            if (streamTrack) {
+                streamTrack.stop();
+            }
+        }
+
+        // 2. Simulasi Proses Scanning AI
+        function scanLogo() {
+            const btnCapture = document.getElementById('btn-capture');
+            const scanLine = document.getElementById('scan-line');
+            const statusText = document.getElementById('status-text');
+            const hasilScan = document.getElementById('hasil-scan');
+            
+            // Ubah sudut viewfinder jadi warna pink
+            document.querySelectorAll('[id^="corner-"]').forEach(el => {
+                el.classList.replace('border-white/70', 'border-islamic-primary');
+            });
+
+            // Mulai animasi scan
+            scanLine.classList.remove('hidden');
+            btnCapture.classList.add('hidden');
+            statusText.innerText = "Memindai gambar dengan AI...";
+            
+            // Bekukan video (seolah mengambil foto)
+            video.pause();
+
+            // Sembunyikan hasil lama jika ada
+            hasilScan.classList.add('hidden');
+            document.getElementById('hasil-details').classList.add('hidden');
+
+            // Simulasi loading AI (2 detik)
+            setTimeout(() => {
+                scanLine.classList.add('hidden');
+                statusText.innerText = "";
+                tampilkanHasilScan();
+            }, 2000);
+        }
+
+        // 3. Menampilkan Hasil Simulasi (Valid / Tidak Valid secara Acak)
+        function tampilkanHasilScan() {
+            const hasilScan = document.getElementById('hasil-scan');
+            const icon = document.getElementById('hasil-icon');
+            const title = document.getElementById('hasil-title');
+            const desc = document.getElementById('hasil-desc');
+            const details = document.getElementById('hasil-details');
+
+            // Randomize untuk prototype (80% sukses, 20% palsu)
+            const isAsli = Math.random() < 0.8;
+
+            hasilScan.classList.remove('hidden');
+
+            if (isAsli) {
+                // UI Asli
+                hasilScan.classList.replace('bg-gray-50', 'bg-green-50');
+                hasilScan.classList.replace('border-red-200', 'border-green-200');
+                hasilScan.classList.add('border-green-200');
+                
+                icon.className = "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl shadow-sm bg-green-500 text-white";
+                icon.innerHTML = '<i class="fa-solid fa-check"></i>';
+                
+                title.innerText = "Logo Terverifikasi Asli!";
+                title.className = "text-xl font-bold text-center mb-1 text-green-700";
+                
+                desc.innerText = "Logo ini terdaftar resmi di database BPJPH (Badan Penyelenggara Jaminan Produk Halal).";
+                
+                // Mockup Data
+                details.innerHTML = `
+                    <p class="font-bold text-gray-700 border-b pb-1 mb-2">Detail Sertifikat</p>
+                    <div class="grid grid-cols-2 gap-2 text-gray-600">
+                        <span>No. Sertifikat:</span> <span class="font-mono text-right font-bold">ID1234567890</span>
+                        <span>Status:</span> <span class="text-right text-green-600 font-bold">Aktif</span>
+                        <span>Masa Berlaku:</span> <span class="text-right">12 Nov 2028</span>
+                    </div>
+                `;
+                details.classList.remove('hidden');
+            } else {
+                // UI Palsu / Tidak Ditemukan
+                hasilScan.classList.replace('bg-gray-50', 'bg-red-50');
+                hasilScan.classList.replace('border-green-200', 'border-red-200');
+                hasilScan.classList.add('border-red-200');
+                
+                icon.className = "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3 text-3xl shadow-sm bg-red-500 text-white";
+                icon.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                
+                title.innerText = "Tidak Terverifikasi";
+                title.className = "text-xl font-bold text-center mb-1 text-red-700";
+                
+                desc.innerText = "Logo atau pola tidak dikenali di sistem BPJPH. Pastikan gambar jelas atau cek nomor secara manual.";
+            }
+        }
+
+        // 4. Reset Scanner
+        function resetScan() {
+            video.play();
+            document.getElementById('hasil-scan').classList.add('hidden');
+            document.getElementById('btn-capture').classList.remove('hidden');
+            document.getElementById('status-text').innerText = "Posisikan logo Halal di dalam bingkai, lalu tekan tombol.";
+            
+            // Kembalikan warna sudut
+            document.querySelectorAll('[id^="corner-"]').forEach(el => {
+                el.classList.replace('border-islamic-primary', 'border-white/70');
+            });
+            
+            // Reset background hasil
+            const hasilScan = document.getElementById('hasil-scan');
+            hasilScan.className = "hidden mt-6 bg-gray-50 p-5 rounded-2xl border transition-all duration-500";
+        }
+
+        // 5. Switch Tab (Kamera vs Manual Input)
+        function switchTab(tab) {
+            const btnKamera = document.getElementById('tab-kamera');
+            const btnManual = document.getElementById('tab-manual');
+            const viewKamera = document.getElementById('view-kamera');
+            const viewManual = document.getElementById('view-manual');
+
+            if (tab === 'kamera') {
+                btnKamera.className = "px-6 py-2 rounded-full text-sm font-bold bg-islamic-primary text-white transition-all";
+                btnManual.className = "px-6 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-islamic-primary transition-all";
+                viewKamera.classList.replace('hidden', 'block');
+                viewManual.classList.replace('block', 'hidden');
+                startCamera(); // Nyalakan kamera lagi
+            } else {
+                btnManual.className = "px-6 py-2 rounded-full text-sm font-bold bg-islamic-primary text-white transition-all";
+                btnKamera.className = "px-6 py-2 rounded-full text-sm font-bold text-gray-500 hover:text-islamic-primary transition-all";
+                viewManual.classList.replace('hidden', 'block');
+                viewKamera.classList.replace('block', 'hidden');
+                stopCamera(); // Matikan kamera agar hemat baterai
+            }
+        }
+
+        // 6. Cek Nomor Manual
+        function cekManual() {
+            const inputVal = document.getElementById('input-nomor').value.trim();
+            const hasilBox = document.getElementById('hasil-manual');
+            
+            if(inputVal === '') {
+                alert("Harap masukkan nomor sertifikat terlebih dahulu!");
+                return;
+            }
+
+            hasilBox.classList.remove('hidden');
+            
+            // Cek sederhana (misal jika awalan ID akan valid)
+            if(inputVal.toUpperCase().startsWith('ID') && inputVal.length > 5) {
+                hasilBox.className = "mt-6 p-4 rounded-xl border border-green-200 bg-green-50";
+                hasilBox.innerHTML = `
+                    <div class="flex items-center text-green-700 mb-2">
+                        <i class="fa-solid fa-circle-check text-2xl mr-2"></i>
+                        <h3 class="font-bold text-lg">Sertifikat Valid</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Nomor <strong class="text-gray-800">${inputVal}</strong> terdaftar di Kementerian Agama RI.</p>
+                    <span class="text-xs bg-green-200 text-green-800 px-2 py-1 rounded font-bold">Status: Halal</span>
+                `;
+            } else {
+                hasilBox.className = "mt-6 p-4 rounded-xl border border-red-200 bg-red-50";
+                hasilBox.innerHTML = `
+                    <div class="flex items-center text-red-700 mb-2">
+                        <i class="fa-solid fa-circle-xmark text-2xl mr-2"></i>
+                        <h3 class="font-bold text-lg">Tidak Ditemukan</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">Nomor <strong class="text-gray-800">${inputVal}</strong> tidak dikenali di database kami. Pastikan format nomor benar (Cth: diawali dengan ID).</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

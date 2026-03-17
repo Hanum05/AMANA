@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Wakaf - Islamic Finance Insight</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Poppins & Amiri) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            light: '#fdf2f8', // Pastel pink sangat muda
+                            primary: '#f472b6', // Pastel pink utama (Pink-400)
+                            dark: '#9d174d', // Pink gelap untuk kontras teks/footer
+                            accent: '#eab308' // Kuning tetap untuk tombol aksi agar menonjol
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo.png" alt="Logo" class="h-10 w-auto outline-none border-none rounded-none object-contain" onerror="this.src='https://via.placeholder.com/40x40?text=A'">
+                <span class="font-bold text-2xl tracking-tight text-islamic-dark">AMANA</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600">
+                <a href="index.html" class="hover:text-islamic-primary transition-colors">Beranda</a>
+                <a href="zakat.html" class="hover:text-islamic-primary transition-colors">Zakat</a>
+                <!-- Link Wakaf Aktif -->
+                <a href="wakaf.html" class="text-islamic-primary font-semibold border-b-2 border-islamic-primary pb-1">Wakaf</a>
+                <a href="waris.html" class="hover:text-islamic-primary transition-colors">Waris</a>
+                <a href="artikel.html" class="hover:text-islamic-primary transition-colors">Artikel</a>
+                <a href="faq.html" class="hover:text-islamic-primary transition-colors">FAQ</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Beranda</a>
+                <a href="zakat.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Zakat</a>
+                <a href="wakaf.html" class="block py-2 text-islamic-primary font-bold">Wakaf</a>
+                <a href="waris.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Waris</a>
+                <a href="artikel.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Artikel</a>
+                <a href="faq.html" class="block py-2 text-gray-700 hover:text-islamic-primary">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Wakaf -->
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Breadcrumb / Back Link -->
+        <div class="mb-8">
+            <a href="index.html" class="inline-flex items-center text-gray-500 hover:text-blue-600 mb-4 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Beranda
+            </a>
+            <h1 class="text-3xl md:text-5xl font-bold text-blue-900">Panduan Wakaf Lengkap</h1>
+            <div class="w-20 h-1 bg-blue-500 mt-4 rounded-full"></div>
+        </div>
+
+        <article class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+            
+            <!-- Pengertian -->
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Pengertian Wakaf</h2>
+            <p class="mb-4">Secara bahasa (etimologi), <strong>"Wakaf"</strong> berasal dari kata <em>Waqf</em> yang berarti <em>Al-Habs</em> (menahan) dan <em>At-Tasbil</em> (menyalurkan jalannya). Artinya, menahan pokok harta dan menyalurkan hasilnya di jalan Allah.</p>
+            <p>Secara istilah, wakaf adalah perbuatan hukum wakif (pihak yang mewakafkan) untuk memisahkan dan/atau menyerahkan sebagian harta benda miliknya untuk dimanfaatkan selamanya atau untuk jangka waktu tertentu sesuai dengan kepentingannya guna keperluan ibadah dan/atau kesejahteraan umum menurut syariah.</p>
+
+            <!-- Dalil Section -->
+            <div class="bg-blue-50 p-6 md:p-8 rounded-2xl border-l-4 border-blue-600 my-10 shadow-sm space-y-10">
+                <div>
+                    <h3 class="text-blue-800 font-bold text-lg flex items-center mb-6">
+                        <i class="fa-solid fa-book-quran mr-3 text-2xl"></i>QS. Ali Imran: 92
+                    </h3>
+                    <!-- Ayat Arab -->
+                    <p class="font-arabic text-3xl text-right leading-loose mb-6 text-gray-800" dir="rtl">
+                        لَن تَنَالُوا الْبِرَّ حَتَّىٰ تُنفِقُوا مِمَّا تُحِبُّونَ ۚ وَمَا تُنفِقُوا مِن شَيْءٍ فَإِنَّ اللَّهَ بِهِ عَلِيمٌ
+                    </p>
+                    <!-- Terjemahan -->
+                    <p class="italic text-gray-700 text-sm md:text-base border-t border-blue-200 pt-4">
+                        "Kamu sekali-kali tidak sampai kepada kebajikan (yang sempurna), sebelum kamu menafkahkan sebahagian harta yang kamu cintai. Dan apa saja yang kamu nafkahkan maka sesungguhnya Allah mengetahuinya."
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-blue-800 font-bold text-lg flex items-center mb-6">
+                        <i class="fa-solid fa-scroll mr-3 text-2xl"></i>Hadis Riwayat Muslim
+                    </h3>
+                    <!-- Teks Arab Hadis -->
+                    <p class="font-arabic text-3xl text-right leading-loose mb-6 text-gray-800" dir="rtl">
+                         إِذَا مَاتَ الْإِنْسَانُ انْقَطَعَ عَمَلُهُ إِلَّا مِنْ ثَلَاثَةٍ مِنْ صَدَقَةٍ جَارِيَةٍ وَعِلْمٍ يُنْتَفَعُ بِهِ وَوَلَدٍ صَالِحٍ يَدْعُو لَهُ
+                    </p>
+                    <p class="italic text-gray-700 text-sm md:text-base border-t border-blue-200 pt-4">
+                        "Apabila manusia meninggal dunia, maka terputuslah amalnya kecuali tiga perkara: <strong>sedekah jariyah (wakaf)</strong>, ilmu yang bermanfaat, atau anak sholeh yang mendoakannya."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Rukun Wakaf -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Rukun Wakaf</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-300 transition">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-4 font-bold text-lg">1</div>
+                            <h3 class="font-bold text-xl text-blue-900">Wakif (Pewakaf)</h3>
+                        </div>
+                        <p class="text-sm text-gray-600">Orang yang mewakafkan harta. Syaratnya: Merdeka, berakal sehat, dewasa (baligh), dan tidak di bawah pengampunan (boros).</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-300 transition">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-4 font-bold text-lg">2</div>
+                            <h3 class="font-bold text-xl text-blue-900">Mauquf (Harta)</h3>
+                        </div>
+                        <p class="text-sm text-gray-600">Harta yang diwakafkan. Harus barang yang bernilai, milik penuh wakif, dan tahan lama (zatnya tidak habis sekali pakai).</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-300 transition">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-4 font-bold text-lg">3</div>
+                            <h3 class="font-bold text-xl text-blue-900">Mauquf 'Alaih</h3>
+                        </div>
+                        <p class="text-sm text-gray-600">Pihak yang menerima manfaat wakaf. Bisa berupa tujuan umum (fakir miskin, masjid) atau pihak tertentu.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-300 transition">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-4 font-bold text-lg">4</div>
+                            <h3 class="font-bold text-xl text-blue-900">Sighat (Ikrar)</h3>
+                        </div>
+                        <p class="text-sm text-gray-600">Pernyataan kehendak wakif untuk mewakafkan hartanya, baik lisan, tulisan, maupun isyarat yang sah.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jenis Wakaf Detail -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Jenis-Jenis Wakaf</h2>
+                <div class="space-y-6">
+                    <!-- Berdasarkan Peruntukan -->
+                    <div class="border border-gray-200 rounded-2xl p-6 md:p-8 hover:border-blue-500 transition bg-white shadow-sm group">
+                        <h3 class="font-bold text-xl text-gray-800 group-hover:text-blue-700 mb-4 flex items-center">
+                            <i class="fa-solid fa-users-rays text-blue-500 mr-3 text-2xl"></i> Berdasarkan Peruntukan
+                        </h3>
+                        <ul class="list-disc pl-6 text-base text-gray-600 space-y-2 marker:text-blue-500">
+                            <li><strong>Wakaf Khairi (Umum):</strong> Diperuntukkan bagi kepentingan umum/kebajikan (seperti Masjid, Rumah Sakit, Sekolah). Pahalanya terus mengalir luas.</li>
+                            <li><strong>Wakaf Ahli (Keluarga):</strong> Diperuntukkan bagi kesejahteraan keluarga atau kerabat wakif itu sendiri.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Berdasarkan Jenis Harta -->
+                    <div class="border border-gray-200 rounded-2xl p-6 md:p-8 hover:border-blue-500 transition bg-white shadow-sm group">
+                        <h3 class="font-bold text-xl text-gray-800 group-hover:text-blue-700 mb-4 flex items-center">
+                            <i class="fa-solid fa-coins text-blue-500 mr-3 text-2xl"></i> Berdasarkan Harta (Objek)
+                        </h3>
+                        <div class="grid sm:grid-cols-2 gap-6 mt-4">
+                            <div class="bg-gray-50 p-5 rounded-xl border border-gray-100">
+                                <strong class="block text-blue-800 mb-2 text-lg">Benda Tidak Bergerak</strong>
+                                <p class="text-sm text-gray-600">Tanah, bangunan, masjid, sumur, kebun, dll.</p>
+                            </div>
+                            <div class="bg-gray-50 p-5 rounded-xl border border-gray-100">
+                                <strong class="block text-blue-800 mb-2 text-lg">Benda Bergerak</strong>
+                                <p class="text-sm text-gray-600">Uang (Cash Wakaf), logam mulia, surat berharga, kendaraan, hingga Hak Kekayaan Intelektual (HAKI).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Keutamaan Box -->
+            <div class="mt-14 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 md:p-10 text-white text-center shadow-xl">
+                <h2 class="text-3xl font-bold mb-4 text-white">Keutamaan Wakaf</h2>
+                <p class="mb-8 text-blue-100 text-lg italic">"Pahala yang tidak akan terputus meskipun raga telah terkubur."</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6 text-sm font-medium">
+                    <div class="flex items-center justify-center bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20 shadow-inner">
+                        <i class="fa-solid fa-infinity text-yellow-400 mr-3 text-2xl"></i> Kekal Manfaatnya
+                    </div>
+                    <div class="flex items-center justify-center bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20 shadow-inner">
+                        <i class="fa-solid fa-hands-holding-circle text-yellow-400 mr-3 text-2xl"></i> Jaminan Sosial Umat
+                    </div>
+                    <div class="flex items-center justify-center bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20 shadow-inner">
+                        <i class="fa-solid fa-arrow-trend-up text-yellow-400 mr-3 text-2xl"></i> Memajukan Peradaban
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-islamic-dark text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Islamic Finance Insight</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mendorong literasi keuangan syariah di Indonesia melalui teknologi digital dan edukasi yang mudah diakses oleh semua lapisan masyarakat.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Tautan Cepat</h4>
+                <ul class="text-gray-400 space-y-2 text-sm">
+                    <li><a href="zakat.html" class="hover:text-white transition-colors">Tentang Zakat</a></li>
+                    <li><a href="wakaf.html" class="hover:text-white transition-colors">Tentang Wakaf</a></li>
+                    <li><a href="hitung-waris.html" class="hover:text-white transition-colors">Kalkulator Waris</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Kontak</h4>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Islamic Finance Insight. Dipersembahkan untuk Lomba Poster Nasional.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

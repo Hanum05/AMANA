@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Waris - Islamic Finance Insight</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            light: '#fdf2f8', // Pastel pink sangat muda
+                            primary: '#f472b6', // Pastel pink utama (Pink-400)
+                            dark: '#9d174d', // Pink gelap untuk kontras teks/footer
+                            accent: '#eab308' // Kuning tetap untuk tombol aksi
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo.png" alt="Logo" class="h-10 w-auto outline-none border-none rounded-none object-contain" onerror="this.src='https://via.placeholder.com/40x40?text=A'">
+                <span class="font-bold text-2xl tracking-tight text-islamic-dark">AMANA</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-islamic-primary transition-colors">Beranda</a>
+                <a href="zakat.html" class="hover:text-islamic-primary transition-colors">Zakat</a>
+                <a href="wakaf.html" class="hover:text-islamic-primary transition-colors">Wakaf</a>
+                <a href="waris.html" class="hover:text-islamic-primary transition-colors">Waris</a>
+                <a href="artikel.html" class="hover:text-islamic-primary transition-colors">Artikel</a>
+                <a href="faq.html" class="hover:text-islamic-primary transition-colors">FAQ</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Beranda</a>
+                <a href="zakat.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Zakat</a>
+                <a href="wakaf.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Wakaf</a>
+                <a href="waris.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Waris</a>
+                <a href="artikel.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Artikel</a>
+                <a href="faq.html" class="block py-2 text-gray-700 hover:text-islamic-primary">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Kalkulator -->
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Breadcrumb / Back Link -->
+        <div class="mb-8">
+            <a href="waris.html" class="inline-flex items-center text-gray-500 hover:text-red-500 mb-4 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Materi Waris
+            </a>
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-900">Kalkulator Waris Islam</h1>
+            <p class="text-gray-500 mt-3 text-lg">Hitung estimasi pembagian waris secara syar'i (Faraidh)</p>
+            <div class="w-20 h-1 bg-red-500 mt-4 rounded-full"></div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-12">
+            <div class="bg-red-50 p-4 border-b border-red-100 text-sm text-center text-red-800 font-medium">
+                <i class="fa-solid fa-circle-info mr-2"></i> Perhitungan ini menggunakan asumsi umum (Mazhab Syafi'i) dan ditujukan untuk edukasi/estimasi.
+            </div>
+            
+            <div class="p-6 md:p-8 md:px-10">
+                <!-- STEP 1: Harta -->
+                <h3 class="text-xl font-bold text-gray-800 mb-5 border-b pb-2 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-islamic-light text-islamic-primary flex items-center justify-center mr-3 text-sm">1</div> 
+                    Data Harta Pewaris
+                </h3>
+                <div class="grid md:grid-cols-2 gap-6 mb-10">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Total Harta Keseluruhan (Rp)</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-400 font-medium">Rp</span>
+                            <input type="number" id="total_harta" class="w-full pl-10 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-islamic-primary focus:border-islamic-primary outline-none transition" placeholder="Contoh: 100000000" min="0">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Hutang Pewaris (Rp)</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-400 font-medium">Rp</span>
+                            <input type="number" id="hutang" class="w-full pl-10 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-islamic-primary focus:border-islamic-primary outline-none transition" placeholder="0" min="0">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Biaya Pengurusan Jenazah (Rp)</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-400 font-medium">Rp</span>
+                            <input type="number" id="biaya_jenazah" class="w-full pl-10 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-islamic-primary focus:border-islamic-primary outline-none transition" placeholder="0" min="0">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Wasiat (Maks 1/3 Harta Bersih) (Rp)</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-gray-400 font-medium">Rp</span>
+                            <input type="number" id="wasiat" class="w-full pl-10 p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-islamic-primary focus:border-islamic-primary outline-none transition" placeholder="0" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Ahli Waris -->
+                <h3 class="text-xl font-bold text-gray-800 mb-5 border-b pb-2 flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-islamic-light text-islamic-primary flex items-center justify-center mr-3 text-sm">2</div> 
+                    Komposisi Ahli Waris Utama
+                </h3>
+                <div class="space-y-6 mb-10">
+                    <!-- Gender Pewaris -->
+                    <div class="flex flex-col md:flex-row md:items-center gap-4 bg-islamic-light/50 p-4 rounded-xl border border-pink-50">
+                        <span class="text-sm font-semibold text-gray-800">Jenis Kelamin Pewaris (Yang Meninggal):</span>
+                        <div class="flex space-x-6">
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="radio" name="pewaris_gender" value="pria" checked class="w-5 h-5 text-islamic-primary focus:ring-islamic-primary border-gray-300" onchange="togglePasanganLabel()">
+                                <span class="ml-2 text-sm font-medium">Laki-laki (Suami)</span>
+                            </label>
+                            <label class="inline-flex items-center cursor-pointer">
+                                <input type="radio" name="pewaris_gender" value="wanita" class="w-5 h-5 text-islamic-primary focus:ring-islamic-primary border-gray-300" onchange="togglePasanganLabel()">
+                                <span class="ml-2 text-sm font-medium">Perempuan (Istri)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- Pasangan -->
+                        <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-islamic-primary transition">
+                            <span id="label_pasangan" class="font-medium">Istri</span>
+                            <select id="input_pasangan" class="bg-gray-50 border border-gray-200 text-sm rounded-lg focus:ring-islamic-primary focus:border-islamic-primary p-2 outline-none">
+                                <option value="0">Tidak Ada/Cerai</option>
+                                <option value="1">Ada (1 Orang)</option>
+                                <!-- Disimplifikasi untuk edukasi dasar, tidak multi istri -->
+                            </select>
+                        </div>
+                        <!-- Ayah -->
+                        <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-islamic-primary transition">
+                            <span class="font-medium">Ayah</span>
+                            <select id="input_ayah" class="bg-gray-50 border border-gray-200 text-sm rounded-lg focus:ring-islamic-primary focus:border-islamic-primary p-2 outline-none">
+                                <option value="0">Sudah Wafat</option>
+                                <option value="1">Masih Hidup</option>
+                            </select>
+                        </div>
+                        <!-- Ibu -->
+                        <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-islamic-primary transition">
+                            <span class="font-medium">Ibu</span>
+                            <select id="input_ibu" class="bg-gray-50 border border-gray-200 text-sm rounded-lg focus:ring-islamic-primary focus:border-islamic-primary p-2 outline-none">
+                                <option value="0">Sudah Wafat</option>
+                                <option value="1">Masih Hidup</option>
+                            </select>
+                        </div>
+                        <!-- Anak Laki -->
+                        <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-islamic-primary transition">
+                            <span class="font-medium">Anak Laki-laki</span>
+                            <div class="flex items-center">
+                                <input type="number" id="input_anak_lk" class="w-16 p-2 bg-gray-50 border border-gray-200 rounded-lg text-center focus:ring-islamic-primary outline-none" value="0" min="0">
+                                <span class="ml-2 text-sm text-gray-500">Orang</span>
+                            </div>
+                        </div>
+                        <!-- Anak Perempuan -->
+                        <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-islamic-primary transition">
+                            <span class="font-medium">Anak Perempuan</span>
+                            <div class="flex items-center">
+                                <input type="number" id="input_anak_pr" class="w-16 p-2 bg-gray-50 border border-gray-200 rounded-lg text-center focus:ring-islamic-primary outline-none" value="0" min="0">
+                                <span class="ml-2 text-sm text-gray-500">Orang</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="hitungWaris()" class="w-full bg-islamic-primary hover:bg-islamic-dark text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 active:scale-95 text-lg flex justify-center items-center">
+                    <i class="fa-solid fa-calculator mr-3"></i> Hitung Pembagian Harta
+                </button>
+            </div>
+        </div>
+
+        <!-- RESULT AREA (Hidden by default) -->
+        <div id="hasil_waris" class="hidden mt-8 bg-white rounded-3xl shadow-xl border-t-8 border-islamic-primary p-6 md:p-10 animate-fade-in-up transition-all duration-500">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-4">
+                    <i class="fa-solid fa-check text-3xl"></i>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Hasil Perhitungan</h3>
+                <p class="text-gray-500 mt-2">Berikut adalah estimasi proporsi pembagian harta waris</p>
+            </div>
+            
+            <!-- Ringkasan Harta -->
+            <div class="bg-gray-50 p-5 md:p-6 rounded-2xl mb-8 flex flex-col md:flex-row justify-between items-center border border-gray-100">
+                <span class="text-gray-600 font-medium mb-2 md:mb-0">Total Harta Bersih (Yang Diwariskan):</span>
+                <span class="font-bold text-2xl text-islamic-dark bg-white px-4 py-2 rounded-lg shadow-sm" id="display_harta_bersih">Rp 0</span>
+            </div>
+
+            <!-- Tabel Distribusi -->
+            <div class="overflow-x-auto rounded-xl border border-gray-200 mb-8 shadow-sm">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-islamic-light text-islamic-dark">
+                        <tr>
+                            <th class="p-4 text-sm font-bold uppercase tracking-wider">Ahli Waris</th>
+                            <th class="p-4 text-sm font-bold uppercase tracking-wider text-center">Proporsi Bagian</th>
+                            <th class="p-4 text-sm font-bold uppercase tracking-wider text-right">Nominal (Rp)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel_hasil_body" class="divide-y divide-gray-200 text-base bg-white">
+                        <!-- Rows generated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pesan Peringatan (Jika harta tidak habis / kalalah kompleks) -->
+            <div id="pesan_tambahan" class="hidden bg-yellow-50 text-yellow-800 p-4 rounded-xl border border-yellow-200 mb-8 text-sm flex items-start">
+                <i class="fa-solid fa-triangle-exclamation mt-1 mr-3 text-yellow-600"></i>
+                <span id="teks_pesan_tambahan"></span>
+            </div>
+
+            <div class="text-center border-t border-gray-100 pt-8">
+                <p class="text-sm text-gray-500 mb-6 max-w-2xl mx-auto">
+                    <strong>Catatan Penting:</strong> Perhitungan di atas berdasarkan kaidah dasar Ilmu Faraidh (Ashabul Furudh & Ashabah utama). Jika kasus keluarga melibatkan kakek/nenek, saudara kandung/seibu/sebapak, atau cucu, disarankan untuk berkonsultasi langsung ke Ulama atau Pengadilan Agama setempat.
+                </p>
+                <button onclick="window.print()" class="text-islamic-primary border-2 border-islamic-primary font-semibold px-6 py-3 rounded-xl hover:bg-islamic-light transition inline-flex items-center">
+                    <i class="fa-solid fa-print mr-2"></i> Cetak / Simpan PDF
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-islamic-dark text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Islamic Finance Insight</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mendorong literasi keuangan syariah di Indonesia melalui teknologi digital dan edukasi yang mudah diakses oleh semua lapisan masyarakat.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Tautan Cepat</h4>
+                <ul class="text-gray-400 space-y-2 text-sm">
+                    <li><a href="zakat.html" class="hover:text-white transition-colors">Tentang Zakat</a></li>
+                    <li><a href="wakaf.html" class="hover:text-white transition-colors">Tentang Wakaf</a></li>
+                    <li><a href="hitung-waris.html" class="hover:text-white transition-colors">Kalkulator Waris</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Kontak</h4>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Islamic Finance Insight. Dipersembahkan untuk Lomba Poster Nasional.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mengubah label Suami/Istri berdasarkan pilihan gender pewaris
+        function togglePasanganLabel() {
+            const gender = document.querySelector('input[name="pewaris_gender"]:checked').value;
+            const label = document.getElementById('label_pasangan');
+            if (gender === 'pria') {
+                label.innerText = 'Istri';
+            } else {
+                label.innerText = 'Suami';
+            }
+        }
+
+        // Format angka ke format Rupiah (Indonesia)
+        function formatRupiah(num) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
+        }
+
+        // Logika Utama Kalkulator Waris (Syafi'i Dasar)
+        function hitungWaris() {
+            // A. Ambil Data Harta
+            let totalHarta = parseFloat(document.getElementById('total_harta').value) || 0;
+            let hutang = parseFloat(document.getElementById('hutang').value) || 0;
+            let biayaJenazah = parseFloat(document.getElementById('biaya_jenazah').value) || 0;
+            let wasiat = parseFloat(document.getElementById('wasiat').value) || 0;
+
+            // Jika form total harta kosong, beri peringatan
+            if (totalHarta <= 0) {
+                alert("Harap masukkan Total Harta yang valid.");
+                return;
+            }
+
+            // Validasi Wasiat (Maks 1/3 Harta Bersih sebelum wasiat)
+            let hartaSebelumWasiat = totalHarta - hutang - biayaJenazah;
+            let maxWasiat = hartaSebelumWasiat / 3;
+            if(wasiat > maxWasiat) {
+                alert(`Menurut syariat, Wasiat tidak boleh melebihi 1/3 harta bersih (Maksimal: ${formatRupiah(maxWasiat)}). Nilai wasiat akan disesuaikan secara otomatis.`);
+                wasiat = maxWasiat; 
+                document.getElementById('wasiat').value = wasiat;
+            }
+
+            // Harta Bersih Final
+            let hartaBersih = hartaSebelumWasiat - wasiat;
+            
+            if (hartaBersih <= 0) {
+                alert("Harta tidak cukup/habis setelah dikurangi hutang dan biaya pengurusan jenazah.");
+                document.getElementById('display_harta_bersih').innerText = formatRupiah(0);
+                document.getElementById('hasil_waris').classList.add('hidden');
+                return;
+            }
+
+            document.getElementById('display_harta_bersih').innerText = formatRupiah(hartaBersih);
+
+            // B. Ambil Data Ahli Waris
+            const genderPewaris = document.querySelector('input[name="pewaris_gender"]:checked').value;
+            const adaPasangan = parseInt(document.getElementById('input_pasangan').value);
+            const adaAyah = parseInt(document.getElementById('input_ayah').value);
+            const adaIbu = parseInt(document.getElementById('input_ibu').value);
+            const anakLk = parseInt(document.getElementById('input_anak_lk').value);
+            const anakPr = parseInt(document.getElementById('input_anak_pr').value);
+            const adaAnak = (anakLk > 0 || anakPr > 0);
+
+            // Variabel Penampung Hasil
+            let heirs = [];
+            let currentFixedShare = 0; // Dalam bentuk desimal
+
+            // ==========================================
+            // 1. HITUNG ASHABUL FURUDH (Bagian Pasti)
+            // ==========================================
+
+            // Ayah (Jika ada anak, Ayah dapat 1/6 pasti)
+            if (adaAyah) {
+                if (adaAnak) {
+                    heirs.push({ name: "Ayah", shareDesc: "1/6", shareVal: (1/6), type: "fixed" });
+                }
+            }
+
+            // Ibu
+            if (adaIbu) {
+                let share = (adaAnak) ? (1/6) : (1/3); // Catatan: Asumsi sederhana tidak ada saudara jamak
+                let desc = (adaAnak) ? "1/6 (Ada anak)" : "1/3 (Tidak ada anak)";
+                heirs.push({ name: "Ibu", shareDesc: desc, shareVal: share, type: "fixed" });
+            }
+
+            // Pasangan (Suami/Istri)
+            if (adaPasangan) {
+                if (genderPewaris === 'pria') { // Yang wafat suami -> Jatah Istri
+                    let share = (adaAnak) ? (1/8) : (1/4);
+                    let desc = (adaAnak) ? "1/8 (Ada anak)" : "1/4 (Tidak ada anak)";
+                    heirs.push({ name: "Istri", shareDesc: desc, shareVal: share, type: "fixed" });
+                } else { // Yang wafat istri -> Jatah Suami
+                    let share = (adaAnak) ? (1/4) : (1/2);
+                    let desc = (adaAnak) ? "1/4 (Ada anak)" : "1/2 (Tidak ada anak)";
+                    heirs.push({ name: "Suami", shareDesc: desc, shareVal: share, type: "fixed" });
+                }
+            }
+
+            // Anak Perempuan (Jika TIDAK ADA anak laki-laki)
+            if (anakLk === 0 && anakPr > 0) {
+                let sharePr = (anakPr === 1) ? (1/2) : (2/3);
+                let desc = (anakPr === 1) ? "1/2" : "2/3 (Dibagi rata)";
+                heirs.push({ name: `Anak Perempuan (${anakPr} Orang)`, shareDesc: desc, shareVal: sharePr, type: "fixed" });
+            }
+
+            // Hitung Total Bagian Pasti yang terpakai
+            heirs.forEach(h => {
+                if(h.type === 'fixed') {
+                    currentFixedShare += h.shareVal;
+                }
+            });
+
+            // Awl (Jika pembilang lebih besar dari penyebut) - Sederhananya, jika currentFixedShare > 1, kita proporsionalkan
+            if (currentFixedShare > 1) {
+                // Proses Aul: Semua porsi dikurangi secara proporsional
+                let totalProporsi = currentFixedShare;
+                heirs.forEach(h => {
+                    h.shareVal = h.shareVal / totalProporsi;
+                    h.shareDesc += " (Aul)";
+                });
+                currentFixedShare = 1; // Sisa harta jadi 0
+            }
+
+            let sisaHartaDesimal = 1 - currentFixedShare;
+            let sisaHartaNominal = hartaBersih * sisaHartaDesimal;
+            
+            // Pesan Peringatan Reset
+            const pesanBox = document.getElementById('pesan_tambahan');
+            const teksPesan = document.getElementById('teks_pesan_tambahan');
+            pesanBox.classList.add('hidden');
+
+            // ==========================================
+            // 2. HITUNG ASHABAH (Sisa Harta)
+            // ==========================================
+
+            if (sisaHartaDesimal > 0.0001) { // Menghindari floating point error
+                
+                // Skenario A: Ada Anak Laki-laki (Mereka menarik Anak Pr menjadi Ashabah Bil Ghair 2:1)
+                if (anakLk > 0) {
+                    let totalBagian = (anakLk * 2) + (anakPr * 1);
+                    let nominalPerBagian = sisaHartaNominal / totalBagian;
+
+                    heirs.push({ 
+                        name: `Anak Laki-laki (${anakLk} Orang)`, 
+                        shareDesc: "Ashabah (2 Bagian)", 
+                        shareVal: 0, 
+                        nominal: nominalPerBagian * 2 * anakLk,
+                        type: "ashabah" 
+                    });
+
+                    if (anakPr > 0) {
+                        heirs.push({ 
+                            name: `Anak Perempuan (${anakPr} Orang)`, 
+                            shareDesc: "Ashabah (1 Bagian)", 
+                            shareVal: 0, 
+                            nominal: nominalPerBagian * 1 * anakPr,
+                            type: "ashabah" 
+                        });
+                    }
+                } 
+                // Skenario B: Tidak ada anak laki-laki, Ayah menjadi Ashabah (mengambil sisa)
+                else if (adaAyah) {
+                    let descSisa = (adaAnak) ? "Ashabah (Sisa setelah 1/6)" : "Ashabah (Menghabiskan Sisa)";
+                    let existingAyah = heirs.find(h => h.name === "Ayah");
+                    
+                    if(existingAyah) {
+                        existingAyah.type = "fixed_plus_ashabah";
+                        existingAyah.shareDesc += " + Sisa";
+                        existingAyah.nominalSisa = sisaHartaNominal; 
+                    } else {
+                        heirs.push({ name: "Ayah", shareDesc: descSisa, shareVal: 0, nominal: sisaHartaNominal, type: "ashabah" });
+                    }
+                }
+                // Skenario C: Tidak ada ahli waris ashabah (Kalalah/Radd)
+                else {
+                    heirs.push({ 
+                        name: "Sisa Harta", 
+                        shareDesc: "Dikembalikan (Radd) ke Ahli Waris / Baitul Mal", 
+                        shareVal: 0, 
+                        nominal: sisaHartaNominal, 
+                        type: "sisa" 
+                    });
+                    
+                    teksPesan.innerHTML = "Terdapat sisa harta karena tidak ada ahli waris laki-laki (Ashabah). Dalam hukum aslinya, sisa ini dibagikan kembali (Radd) kepada ahli waris yang ada (kecuali suami/istri), atau diturunkan ke saudara/paman, atau diserahkan ke Baitul Mal.";
+                    pesanBox.classList.remove('hidden');
+                }
+            }
+
+            // ==========================================
+            // 3. RENDER KE TABEL HTML
+            // ==========================================
+            const tbody = document.getElementById('tabel_hasil_body');
+            tbody.innerHTML = '';
+
+            heirs.forEach(h => {
+                let nominal = 0;
+                if (h.type === 'fixed') {
+                    nominal = hartaBersih * h.shareVal;
+                } else if (h.type === 'fixed_plus_ashabah') {
+                    nominal = (hartaBersih * h.shareVal) + h.nominalSisa;
+                } else {
+                    nominal = h.nominal;
+                }
+
+                // Jangan tampilkan jika nominal 0
+                if(nominal > 0) {
+                    const row = `
+                        <tr class="hover:bg-pink-50 transition border-b border-gray-100">
+                            <td class="p-4 font-semibold text-gray-800">${h.name}</td>
+                            <td class="p-4 text-center">
+                                <span class="bg-islamic-light text-islamic-dark text-xs font-bold px-3 py-1 rounded-full">${h.shareDesc}</span>
+                            </td>
+                            <td class="p-4 text-right font-bold text-islamic-primary text-lg">${formatRupiah(nominal)}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                }
+            });
+
+            // Tampilkan container hasil dengan animasi
+            document.getElementById('hasil_waris').classList.remove('hidden');
+            
+            // Scroll otomatis ke hasil dengan jeda sedikit agar mulus
+            setTimeout(() => {
+                document.getElementById('hasil_waris').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>

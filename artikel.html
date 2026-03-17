@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel Edukasi - Islamic Finance Insight</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            light: '#fdf2f8', // Pastel pink sangat muda
+                            primary: '#f472b6', // Pastel pink utama (Pink-400)
+                            dark: '#9d174d', // Pink gelap untuk kontras teks/footer
+                            accent: '#eab308' // Kuning tetap untuk tombol aksi
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo.png" alt="Logo" class="h-10 w-auto outline-none border-none rounded-none object-contain" onerror="this.src='https://via.placeholder.com/40x40?text=A'">
+                <span class="font-bold text-2xl tracking-tight text-islamic-dark">AMANA</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-islamic-primary transition-colors">Beranda</a>
+                <a href="zakat.html" class="hover:text-islamic-primary transition-colors">Zakat</a>
+                <a href="wakaf.html" class="hover:text-islamic-primary transition-colors">Wakaf</a>
+                <a href="waris.html" class="hover:text-islamic-primary transition-colors">Waris</a>
+                <!-- Link Artikel Aktif -->
+                <a href="artikel.html" class="text-islamic-primary font-semibold border-b-2 border-islamic-primary pb-1">Artikel</a>
+                <a href="faq.html" class="hover:text-islamic-primary transition-colors">FAQ</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Beranda</a>
+                <a href="zakat.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Zakat</a>
+                <a href="wakaf.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Wakaf</a>
+                <a href="waris.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Waris</a>
+                <a href="artikel.html" class="block py-2 text-islamic-primary font-bold">Artikel</a>
+                <a href="faq.html" class="block py-2 text-gray-700 hover:text-islamic-primary">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Artikel -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        <!-- Breadcrumb / Header -->
+        <div class="mb-12 text-center">
+            <a href="index.html" class="inline-flex items-center text-gray-500 hover:text-islamic-primary mb-4 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Beranda
+            </a>
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-900">Artikel Edukasi</h1>
+            <p class="text-gray-500 mt-3 text-lg">Update pengetahuan seputar ekonomi dan keuangan syariah</p>
+            <div class="w-20 h-1 bg-islamic-accent mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <!-- Grid Artikel -->
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <!-- Article 1 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden group">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555529733-0e670560f7e1?auto=format&fit=crop&q=80&w=400" alt="Zakat" class="w-full h-52 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 md:p-8">
+                    <span class="inline-block px-3 py-1 bg-pink-100 text-islamic-dark text-xs font-bold rounded-full mb-3">Zakat</span>
+                    <h3 class="font-bold text-xl mt-2 mb-3 text-gray-900 group-hover:text-islamic-primary transition">Cara Menghitung Zakat Profesi bagi Freelancer</h3>
+                    <p class="text-gray-600 text-sm mb-6 line-clamp-2">Apakah pekerja lepas (freelancer) wajib membayar zakat? Bagaimana cara menentukan nisab dan waktu pembayarannya?</p>
+                    <a href="#" class="text-islamic-primary font-semibold hover:text-islamic-dark transition flex items-center">
+                        Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden group">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=400" alt="Wakaf" class="w-full h-52 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 md:p-8">
+                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full mb-3">Wakaf</span>
+                    <h3 class="font-bold text-xl mt-2 mb-3 text-gray-900 group-hover:text-blue-600 transition">Wakaf Uang: Solusi Ekonomi Umat Masa Kini</h3>
+                    <p class="text-gray-600 text-sm mb-6 line-clamp-2">Mengenal Cash Waqf Linked Sukuk (CWLS) di Indonesia dan bagaimana kontribusinya untuk pembangunan nasional.</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-800 transition flex items-center">
+                        Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden group">
+                <div class="overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1628109631720-6d0df094e970?auto=format&fit=crop&q=80&w=400" alt="Waris" class="w-full h-52 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 md:p-8">
+                    <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 text-xs font-bold rounded-full mb-3">Waris</span>
+                    <h3 class="font-bold text-xl mt-2 mb-3 text-gray-900 group-hover:text-purple-600 transition">Hibah vs Waris: Mana yang Lebih Utama?</h3>
+                    <p class="text-gray-600 text-sm mb-6 line-clamp-2">Membedakan pemberian harta saat masih hidup (hibah) dan pembagian harta setelah wafat (waris) menurut pandangan ulama.</p>
+                    <a href="#" class="text-purple-600 font-semibold hover:text-purple-800 transition flex items-center">
+                        Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button class="bg-white border-2 border-islamic-primary text-islamic-primary hover:bg-islamic-primary hover:text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                Muat Lebih Banyak Artikel
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-islamic-dark text-white py-12 px-4 mt-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Islamic Finance Insight</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mendorong literasi keuangan syariah di Indonesia melalui teknologi digital dan edukasi yang mudah diakses oleh semua lapisan masyarakat.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Tautan Cepat</h4>
+                <ul class="text-gray-400 space-y-2 text-sm">
+                    <li><a href="zakat.html" class="hover:text-white transition-colors">Tentang Zakat</a></li>
+                    <li><a href="wakaf.html" class="hover:text-white transition-colors">Tentang Wakaf</a></li>
+                    <li><a href="hitung-waris.html" class="hover:text-white transition-colors">Kalkulator Waris</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Kontak</h4>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Islamic Finance Insight. Dipersembahkan untuk Lomba Poster Nasional.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertanyaan Umum (FAQ) - Islamic Finance Insight</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            light: '#fdf2f8', // Pastel pink sangat muda
+                            primary: '#f472b6', // Pastel pink utama (Pink-400)
+                            dark: '#9d174d', // Pink gelap untuk kontras teks/footer
+                            accent: '#eab308' // Kuning tetap untuk tombol aksi
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3">
+                <img src="Logo.png" alt="Logo" class="h-10 w-auto outline-none border-none rounded-none object-contain" onerror="this.src='https://via.placeholder.com/40x40?text=A'">
+                <span class="font-bold text-2xl tracking-tight text-islamic-dark">AMANA</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6 font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-islamic-primary transition-colors">Beranda</a>
+                <a href="zakat.html" class="hover:text-islamic-primary transition-colors">Zakat</a>
+                <a href="wakaf.html" class="hover:text-islamic-primary transition-colors">Wakaf</a>
+                <a href="waris.html" class="hover:text-islamic-primary transition-colors">Waris</a>
+                <a href="artikel.html" class="hover:text-islamic-primary transition-colors">Artikel</a>
+                <!-- Link FAQ Aktif -->
+                <a href="faq.html" class="text-islamic-primary font-semibold border-b-2 border-islamic-primary pb-1">FAQ</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Beranda</a>
+                <a href="zakat.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Zakat</a>
+                <a href="wakaf.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Wakaf</a>
+                <a href="waris.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Waris</a>
+                <a href="artikel.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Artikel</a>
+                <a href="faq.html" class="block py-2 text-islamic-primary font-bold">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content FAQ -->
+    <main class="max-w-4xl mx-auto px-4 py-12 min-h-screen">
+        <!-- Breadcrumb / Header -->
+        <div class="mb-12 text-center">
+            <a href="index.html" class="inline-flex items-center text-gray-500 hover:text-islamic-primary mb-4 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Beranda
+            </a>
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-900">Pertanyaan Umum (FAQ)</h1>
+            <p class="text-gray-500 mt-3 text-lg">Temukan jawaban cepat seputar fiqih harta (Ziswaf & Waris)</p>
+            <div class="w-20 h-1 bg-islamic-accent mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <!-- Accordion Container -->
+        <div class="space-y-4">
+            <!-- Item 1 -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 cursor-pointer hover:border-islamic-primary hover:shadow-md transition duration-300" onclick="this.querySelector('p').classList.toggle('hidden'); this.querySelector('i.fa-chevron-down').classList.toggle('rotate-180')">
+                <div class="flex justify-between items-center font-bold text-gray-800 text-lg">
+                    <span class="flex items-center">
+                        <i class="fa-solid fa-circle-question text-islamic-primary mr-3 text-xl"></i>
+                        Apakah hutang orang tua wajib dibayar oleh ahli waris?
+                    </span>
+                    <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </div>
+                <p class="hidden mt-4 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                    Ya. Sebelum harta warisan dibagikan kepada para ahli waris, hutang mayit <strong>wajib</strong> dilunasi terlebih dahulu dari harta peninggalan. Jika harta peninggalan tidak cukup, secara hukum agama ahli waris sangat dianjurkan melunasinya demi membebaskan beban mayit di akhirat, meski bukan kewajiban mutlak jika melebihi harta waris.
+                </p>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 cursor-pointer hover:border-islamic-primary hover:shadow-md transition duration-300" onclick="this.querySelector('p').classList.toggle('hidden'); this.querySelector('i.fa-chevron-down').classList.toggle('rotate-180')">
+                <div class="flex justify-between items-center font-bold text-gray-800 text-lg">
+                    <span class="flex items-center">
+                        <i class="fa-solid fa-circle-question text-islamic-primary mr-3 text-xl"></i>
+                        Bolehkah memberikan zakat kepada orang tua atau anak sendiri?
+                    </span>
+                    <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </div>
+                <p class="hidden mt-4 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                    Tidak boleh. Orang tua (jalur ke atas seperti kakek/nenek) dan anak (jalur ke bawah seperti cucu) adalah pihak yang menjadi tanggung jawab nafkah kita. Oleh karena itu, mereka tidak boleh menerima zakat dari kita. Zakat sebaiknya diberikan kepada kerabat jauh yang miskin (seperti saudara kandung/sepupu) yang tidak dalam tanggungan nafkah kita.
+                </p>
+            </div>
+
+            <!-- Item 3 (Tambahan) -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 cursor-pointer hover:border-islamic-primary hover:shadow-md transition duration-300" onclick="this.querySelector('p').classList.toggle('hidden'); this.querySelector('i.fa-chevron-down').classList.toggle('rotate-180')">
+                <div class="flex justify-between items-center font-bold text-gray-800 text-lg">
+                    <span class="flex items-center">
+                        <i class="fa-solid fa-circle-question text-islamic-primary mr-3 text-xl"></i>
+                        Apa bedanya Zakat, Infak, dan Sedekah?
+                    </span>
+                    <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </div>
+                <p class="hidden mt-4 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                    <strong>Zakat</strong> hukumnya wajib, memiliki nisab (batas minimal), haul (batas waktu), dan penerimanya (asnaf) sudah ditentukan secara khusus dalam Al-Quran.<br><br>
+                    <strong>Infak</strong> adalah pengeluaran harta untuk kebaikan yang disunnahkan, biasanya dalam bentuk materi/uang, tidak memiliki batasan waktu atau jumlah tertentu.<br><br>
+                    <strong>Sedekah</strong> maknanya lebih luas dari infak. Selain materi, sedekah bisa berbentuk non-materi, seperti senyuman, menyingkirkan duri di jalan, atau memberikan tenaga/pikiran.
+                </p>
+            </div>
+            
+            <!-- Item 4 (Tambahan) -->
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 cursor-pointer hover:border-islamic-primary hover:shadow-md transition duration-300" onclick="this.querySelector('p').classList.toggle('hidden'); this.querySelector('i.fa-chevron-down').classList.toggle('rotate-180')">
+                <div class="flex justify-between items-center font-bold text-gray-800 text-lg">
+                    <span class="flex items-center">
+                        <i class="fa-solid fa-circle-question text-islamic-primary mr-3 text-xl"></i>
+                        Apakah Wakaf harus berupa tanah atau bangunan (Masjid)?
+                    </span>
+                    <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                </div>
+                <p class="hidden mt-4 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                    Tidak. Saat ini, sesuai dengan UU Wakaf dan Fatwa MUI, wakaf bisa berbentuk benda bergerak yang tidak habis dipakai. Salah satu yang paling populer di era digital adalah <strong>Wakaf Uang (Cash Wakaf)</strong>. Uang tersebut akan dikelola secara produktif (misalnya diinvestasikan ke instrumen syariah), dan hasil keuntungannya yang akan disalurkan untuk kegiatan sosial, sementara uang pokoknya tetap utuh.
+                </p>
+            </div>
+        </div>
+
+        <!-- Box Kontak Tambahan -->
+        <div class="mt-12 bg-islamic-light p-8 rounded-2xl text-center border border-pink-100">
+            <h3 class="font-bold text-xl text-islamic-dark mb-2">Masih punya pertanyaan lain?</h3>
+            <p class="text-gray-600 mb-6">Jangan ragu untuk menghubungi kami untuk konsultasi seputar keuangan syariah.</p>
+            <a href="#" class="inline-block bg-islamic-primary hover:bg-islamic-dark text-white font-bold py-3 px-8 rounded-full shadow-md transition duration-300">
+                <i class="fa-solid fa-envelope mr-2"></i> Hubungi Kami
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-islamic-dark text-white py-12 px-4 mt-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div>
+                <h3 class="font-bold text-xl mb-4">Islamic Finance Insight</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mendorong literasi keuangan syariah di Indonesia melalui teknologi digital dan edukasi yang mudah diakses oleh semua lapisan masyarakat.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Tautan Cepat</h4>
+                <ul class="text-gray-400 space-y-2 text-sm">
+                    <li><a href="zakat.html" class="hover:text-white transition-colors">Tentang Zakat</a></li>
+                    <li><a href="wakaf.html" class="hover:text-white transition-colors">Tentang Wakaf</a></li>
+                    <li><a href="hitung-waris.html" class="hover:text-white transition-colors">Kalkulator Waris</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4 text-islamic-accent">Kontak</h4>
+                <div class="flex space-x-4 text-xl">
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-islamic-accent transition-colors"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs">
+            <p>&copy; 2026 Islamic Finance Insight. Dipersembahkan untuk Lomba Poster Nasional.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
