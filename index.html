@@ -52,12 +52,14 @@
                 <a href="artikel.html" class="hover:text-islamic-primary transition-colors">Artikel</a>
                 <a href="faq.html" class="hover:text-islamic-primary transition-colors">FAQ</a>
             </div>
-            <button class="md:hidden text-2xl text-islamic-dark" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <i class="fas fa-bars"></i>
+            <!-- Mengubah fungsi onclick dan menambahkan ID pada ikon -->
+            <button class="md:hidden text-2xl text-islamic-dark focus:outline-none" onclick="toggleMobileMenu()">
+                <i id="mobile-icon" class="fas fa-bars transition-transform duration-300"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+        <!-- Menambahkan left-0 dan top-full agar posisi dropdown tepat di bawah navbar -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-full shadow-lg origin-top transition-all duration-300">
             <div class="px-4 py-2 space-y-2">
                 <a href="index.html" class="block py-2 text-islamic-primary font-bold">Beranda</a>
                 <a href="zakat.html" class="block py-2 text-gray-700 hover:text-islamic-primary">Zakat</a>
@@ -177,5 +179,26 @@
         </div>
     </footer>
 
+    <!-- Menambahkan Script Khusus Mobile Menu sebelum tag penutup body -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-icon');
+            
+            // Toggle menu visibility
+            menu.classList.toggle('hidden');
+            
+            // Ubah ikon dari 'bars' ke 'xmark' dan sebaliknya
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                icon.style.transform = "rotate(90deg)"; // Efek animasi putar kecil
+            }
+        }
+    </script>
 </body>
 </html>
